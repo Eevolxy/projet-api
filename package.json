@@ -1,10 +1,24 @@
 {
-  "name": "${PROJECT_NAME}",
+  "name": "projet-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eevolxy/projet-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eevolxy/projet-api/issues"
+  },
+  "homepage": "https://github.com/Eevolxy/projet-api#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "handlebars": "^4.7.8"
+  }
 }

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Crêpes sucrées",
+    "persons": 4,
+    "duration": "15 min",
+    "ingredients": [
+      "250 g de farine",
+      "4 œufs",
+      "1/2 L de lait",
+      "1 sachet de sucre vanillé",
+      "1 pincée de sel",
+      "1 cuillère à soupe d’huile"
+    ],
+    "instructions": "Mélanger la farine, les œufs, le lait, le sucre et le sel. Laisser reposer 30 min, puis faire cuire dans une poêle chaude légèrement huilée."
+  },
+  {
+    "id": 2,
+    "title": "Pâtes à la carbonara",
+    "persons": 2,
+    "duration": "20 min",
+    "ingredients": [
+      "200 g de spaghetti",
+      "100 g de lardons",
+      "2 jaunes d’œufs",
+      "50 g de parmesan râpé",
+      "Poivre noir"
+    ],
+    "instructions": "Faire cuire les pâtes. Dans une poêle, faire revenir les lardons. Mélanger jaunes d’œufs et parmesan, puis ajouter aux pâtes chaudes avec les lardons et un peu d’eau de cuisson."
+  },
+  {
+    "id": 3,
+    "title": "Tarte aux pommes",
+    "persons": 6,
+    "duration": "45 min",
+    "ingredients": [
+      "1 pâte brisée",
+      "3 pommes",
+      "2 cuillères à soupe de sucre",
+      "1 sachet de sucre vanillé",
+      "1 noisette de beurre"
+    ],
+    "instructions": "Étaler la pâte dans un moule, disposer les pommes tranchées, saupoudrer de sucre et beurre. Enfourner 30 min à 180°C."
+  },
+  {
+    "id": 4,
+    "title": "Salade César",
+    "persons": 3,
+    "duration": "10 min",
+    "ingredients": [
+      "1 laitue romaine",
+      "1 blanc de poulet",
+      "Croûtons",
+      "Parmesan en copeaux",
+      "Sauce César"
+    ],
+    "instructions": "Faire cuire le poulet et le couper en tranches. Mélanger la laitue, le poulet, les croûtons et le parmesan. Napper de sauce César."
+  },
+  {
+    "id": 5,
+    "title": "Soupe de légumes maison",
+    "persons": 4,
+    "duration": "30 min",
+    "ingredients": [
+      "2 carottes",
+      "2 pommes de terre",
+      "1 poireau",
+      "1 oignon",
+      "1 L d’eau",
+      "Sel, poivre"
+    ],
+    "instructions": "Faire revenir l’oignon, ajouter les légumes coupés et l’eau. Laisser mijoter 25 min puis mixer jusqu’à obtention d’une texture lisse."
+  }
+]
