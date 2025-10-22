@@ -5,7 +5,10 @@ import {v4 as uuidv4} from 'uuid'
 
 const router = express.Router()
 
-
+/**
+ * Renvoie toutes les recettes de la base de données dans un fichier JSON
+ * @returns {JSON} Le tableau JSON
+ */
 router.get("/", (req, res) => {
     db.all("SELECT * FROM recipes", (err, rows) => {
         if (err) return res.status(500).json({ error: err.message })
@@ -15,6 +18,11 @@ router.get("/", (req, res) => {
     })
 })
 
+/**
+ * Renvoie le tableau JSON de la recette spécifiée
+ * @param {string} id : L'uuid de la recette cible
+ * @returns {JSON} Le tableau JSON de la recette
+ */
 router.get("/:id", (req, res) => {
     db.get("SELECT * FROM recipes WHERE id = ?", [req.params.id], (err, row) => {
         if (err) return res.status(500).json({ error: err.message })
@@ -25,6 +33,10 @@ router.get("/:id", (req, res) => {
     })
 })
 
+/**
+ * Permet à un administrateur de publier une nouvelle recette
+ * @param {JSON} req : La requête contenant la nouvelle recette
+ */
 router.post("/", isAdmin, (req, res) => {
     const { title, persons, duration, ingredients, instructions } = req.body
     const id = uuidv4()
@@ -39,6 +51,11 @@ router.post("/", isAdmin, (req, res) => {
     )
 })
 
+/**
+ * Permet à un administrateur de modifier la recette spécifiée par l'id
+ * @param {string} id : L'uuid de la recette cible
+ * @param {JSON} req : Le tableau JSON qui va modifier la recette
+ */
 router.put("/:id", isAdmin, (req, res) => {
     const { title, persons, duration, ingredients, instructions } = req.body
 
@@ -55,6 +72,10 @@ router.put("/:id", isAdmin, (req, res) => {
     )
 })
 
+/**
+ * Permet à un administrateur de supprimer la recette specifiée
+ * @param {string} id : L'uuid de la recette cible
+ */
 router.delete("/:id", isAdmin, (req, res) => {
     db.run("DELETE FROM recipes WHERE id = ?", [req.params.id], function (err) {
         if (err) return res.status(500).json({ error: err.message })
