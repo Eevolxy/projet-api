@@ -13,7 +13,10 @@
     <div id="login-form">
         <div id="login-content">
             <h1>Connexion</h1>
-            <form>
+            {{#if error}}
+                <p style="font-weight: bold; color: red">{{error}}</p>
+            {{/if}}
+            <form action="/login" method="post">
                 <div class="form-group">
                     <label for="pseudoOrEmail">Pseudo ou Email</label>
                     <input type="text" id="PseudoOrEmail" name="PseudoOrEmail" autocomplete="off" required>
