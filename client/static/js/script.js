@@ -10,7 +10,7 @@ let displayName = []
 let displayImg = []
 
 // Extraction des données des recettes
-const listName = recipes.map(recipe => recipe.name)
+const listName = divItems.querySelectorAll('*')
 const listImg = recipes.map(recipe => recipe.img)
 
 
@@ -54,22 +54,18 @@ function displayRecipeDetail(recipe) {
 
 
 /* ********** Initial Display ********** */
-displayCards(listName, listImg);
+// displayCards(listName, listImg);
 
 /* ********** Event Listeners ********** */
 // Écouteur d'événement sur l'input de recherche
 divInput.addEventListener('input', () => {
-    divItems.textContent = ''
     let contextInput = divInput.value.toLowerCase()
-    listName.forEach((item, index) => {
-        if (item.toLocaleLowerCase().includes(contextInput)) {
-            displayName.push(item)
-            displayImg.push(listImg[index])
-        }
+    const recipeCards = divItems.querySelectorAll('.recipe-card')
+    recipeCards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase()
+        if (contextInput === '' ||  title.includes(contextInput)) card.style.display = 'block'
+        else card.style.display = 'none'
     });
-    displayCards(displayName, displayImg)
-    displayName = []
-    displayImg = []
 })
 
 divItems.addEventListener('click', (card) => {

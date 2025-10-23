@@ -42,7 +42,7 @@ router.post("/", isAdmin, (req, res) => {
     const id = uuidv4()
 
     db.run(
-        `INSERT INTO recipes (id, title, persons, duration, ingredients, instructions) VALUES (?,?,?,?,?,?)`,
+        `INSERT INTO recipes (id, title, persons, duration, ingredients, instructions, images) VALUES (?,?,?,?,?,?)`,
         [id, title, persons, duration, JSON.stringify(ingredients), instructions],
         function(err) {
             if (err) return res.status(500).json({ error: err.message })
@@ -57,13 +57,13 @@ router.post("/", isAdmin, (req, res) => {
  * @param {JSON} req : Le tableau JSON qui va modifier la recette
  */
 router.put("/:id", isAdmin, (req, res) => {
-    const { title, persons, duration, ingredients, instructions } = req.body
+    const { title, persons, duration, ingredients, instructions, image } = req.body
 
     db.run(
         `UPDATE recipes
-         SET title = ?, persons = ?, duration = ?, ingredients = ?, instructions = ?
+         SET title = ?, persons = ?, duration = ?, ingredients = ?, instructions = ?, image = ?
          WHERE id = ?`,
-        [title, persons, duration, JSON.stringify(ingredients), instructions, req.params.id],
+        [title, persons, duration, JSON.stringify(ingredients), instructions, req.params.id, image],
         function (err) {
             if (err) return res.status(500).json({ error: err.message })
             if (this.changes === 0) return res.status(404).json({ error: "Recette non trouvée" })
