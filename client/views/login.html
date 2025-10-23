@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="icon" href="../static/img/logo-repas.jpg">
+    <title>Se connecter</title>
+</head>
+
+<body>
+    <div id="login-form">
+        <div id="login-content">
+            <h1>Connexion</h1>
+            <form>
+                <div class="form-group">
+                    <label for="pseudoOrEmail">Pseudo ou Email</label>
+                    <input type="text" id="PseudoOrEmail" name="PseudoOrEmail" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                    <span id="eye">👁️‍🗨️</span>
+                </div>
+                <button type="submit" class="login-btn">Se connecter</button>
+            </form>
+            <div id="no-account">Vous ne possédez pas de compte, créez en un</div>
+            <div display="none" id="already-account"></div>
+        </div>
+    </div>
+</body>
+
+<script src="../static/js/login.js"></script>
+
+</html>

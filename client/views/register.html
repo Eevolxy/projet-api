@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="icon" href="../static/img/logo-repas.jpg">
+    <title>Création du compte</title>
+</head>
+
+<body>
+    <div id="login-form">
+        <div id="login-content">
+            <h1>Création du compte</h1>
+            <form>
+                <div class="form-group">
+                    <label for="pseudo">Pseudo</label>
+                    <input type="text" id="Pseudo" name="Pseudo" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" id="Email" name="Email" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                    <span id="eye">👁️‍🗨️</span>
+                </div>
+                <button type="submit" class="login-btn">Créer son compte</button>
+            </form>
+            <div id="already-account">Vous possédez déjà de compte, connectez vous</div>
+            <div display="none" id="no-account"></div>
+        </div>
+    </div>
+</body>
+
+<script src="../static/js/login.js"></script>
+
+</html>
