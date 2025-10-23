@@ -96,5 +96,6 @@ returnArrow.addEventListener('click', () => {
     titlePage.classList.remove('hidden')
     divItems.classList.remove('hidden')
     divInput.value = ''
+    divItems.textContent = ''
     displayCards(listName, listImg);
 });
