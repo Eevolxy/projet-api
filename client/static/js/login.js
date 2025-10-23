@@ -23,9 +23,9 @@ eye.addEventListener('click', () => {
 });
 
 noAccount.addEventListener('click', () => {
-    window.location.href = 'register.html';
+    window.location.href = '/register';
 });
 
 alreadyAccount.addEventListener('click', () => {
-    window.location.href = 'login.handlebars';
+    window.location.href = '/login';
 });
