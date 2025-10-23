@@ -1,5 +1,6 @@
 import express from "express";
 import {db} from "../middlewares/db.js";
+import isAlreadyAthenticated from "../middlewares/isAlreadyAthenticated.js";
 import {v4 as uuidv4} from 'uuid'
 import bcrypt from "bcrypt"
 
@@ -53,7 +54,7 @@ router.post('/api/login', async (req, res) => {
     })
 })
 
-router.get('/login', (req, res) => {
+router.get('/login', isAlreadyAthenticated, (req, res) => {
     res.render('login')
 })
 
@@ -78,7 +79,7 @@ router.post('/login', async (req, res) => {
     })
 })
 
-router.get('/register', (req, res) => {
+router.get('/register', isAlreadyAthenticated, (req, res) => {
     res.render('register')
 })
 
