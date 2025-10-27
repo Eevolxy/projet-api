@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/recipeDetail.css">
+    <link rel="icon" href="../static/img/logo-repas.jpg">
+    <title>Cooking Frenzy - {{recipe.title}}</title>
+</head>
+
+<body>
+    <div id="recipe-detail">
+        <img src={{recipe.image}} alt="image recipe">
+        <div id="recipe-info">
+            <h1>{{recipe.title}}</h1>
+            <p>Pour {{recipe.persons}} personnes</p>
+
+            <h2>Ingrédients :</h2>
+            <ul>
+                {{#each recipe.ingredients}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+
+            <h2>Instructions :</h2>
+            <ol>
+                {{recipe.instructions}}
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

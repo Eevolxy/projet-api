@@ -32,7 +32,7 @@ function displayCards(listNameToDisplay, listImgtoDisplay) {
 }
 
 // Fonction d'affichage des détails d'une recette
-function displayRecipeDetail(recipe) {
+ /*function displayRecipeDetail(recipe) {
     divRecipeDetail.innerHTML = `
         <img src=${recipe.img} alt="image recipe">
         <div id="recipe-info">
@@ -50,7 +50,7 @@ function displayRecipeDetail(recipe) {
             </ol>
         </div>
     `;
-}
+} */
 
 
 /* ********** Initial Display ********** */
@@ -68,7 +68,7 @@ divInput.addEventListener('input', () => {
     });
 })
 
-divItems.addEventListener('click', (card) => {
+/*divItems.addEventListener('click', (card) => {
     const target = card.target.closest('.recipe-card');
     if (target) {
         returnArrow.classList.remove('hidden')
@@ -83,7 +83,7 @@ divItems.addEventListener('click', (card) => {
         displayRecipeDetail(selectedRecipe)
 
     }
-});
+});*/
 
 returnArrow.addEventListener('click', () => {
     returnArrow.classList.add('hidden')

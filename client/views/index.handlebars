@@ -19,7 +19,7 @@
     <h1>Nos Recettes</h1>
     <div id="items" class="recipes-container">
         {{#each recipes}}
-            <div class="recipe-card">
+            <div class="recipe-card" onclick="window.location.href='/recipe/{{id}}'">
                 <img src="{{image}}">
                 <h3>{{title}}</h3>
             </div>

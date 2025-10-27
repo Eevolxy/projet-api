@@ -16,4 +16,14 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/recipe/:id', (req, res) => {
+    db.get("SELECT * FROM recipes WHERE id = ?", [req.params.id], (err, row) => {
+        if (err) return res.redirect('/')
+        if (!row) return res.redirect('/')
+
+        row.ingredients = JSON.parse(row.ingredients)
+        res.render('recipe', { recipe: row })
+    })
+})
+
 export default router
