@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session'
+import swaggerDocs from "./swagger.js";
 import recipesRoutes from './routes/recipes.js'
 import authRoute from './routes/auth.js'
 import viewsRoutes from './routes/views.js'
@@ -24,13 +25,13 @@ const __dirname = path.dirname(__filename)
 app.set('views', path.join(__dirname, '..', 'client', 'views'))
 app.use('/static', express.static(path.join(__dirname, '..', 'client', 'static')))
 
-app.engine('handlebars', engine())
-app.set('view engine', 'handlebars')
 app.engine('handlebars', engine({
     defaultLayout: false
 }))
+app.set('view engine', 'handlebars')
 
 app.use("/api/recipes", recipesRoutes)
+swaggerDocs(app)
 app.use(authRoute)
 app.use(viewsRoutes)
 

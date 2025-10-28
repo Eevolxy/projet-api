@@ -1,0 +1,11 @@
+{
+  "plugins": ["node_modules/jsdoc-openapi"],
+  "source": {
+    "include": ["./server"],
+    "includePattern": ".js$"
+  },
+  "opts": {
+    "destination": "./docs",
+    "recurse": true
+  }
+}
