@@ -5,4 +5,11 @@ import {fileURLToPath} from "url";
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+/**
+ * Connexion à la base de données
+ * @type {Database}
+ *
+ * @example
+ * import {db} from './middlewares/db.js';
+ */
 export const db = new sqlite3.Database(path.join(__dirname, '../data/database.db'))

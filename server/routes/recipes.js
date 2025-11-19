@@ -6,8 +6,20 @@ import {v4 as uuidv4} from 'uuid'
 const router = express.Router()
 
 /**
- * Renvoie toutes les recettes de la base de données dans un fichier JSON
- * @returns {JSON} Le tableau JSON
+ * @swagger
+ * /api/recipes:
+ *   get:
+ *     summary: Récupère toutes les recettes
+ *     tags: [Recettes]
+ *     responses:
+ *       200:
+ *         description: Liste de toutes les recettes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Recipe'
  */
 router.get("/", (req, res) => {
     db.all("SELECT * FROM recipes", (err, rows) => {
@@ -19,9 +31,27 @@ router.get("/", (req, res) => {
 })
 
 /**
- * Renvoie le tableau JSON de la recette spécifiée
- * @param {string} id : L'uuid de la recette cible
- * @returns {JSON} Le tableau JSON de la recette
+ * @swagger
+ * /api/recipes/{id}:
+ *   get:
+ *     summary: Récupère une recette par son ID
+ *     tags: [Recettes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: L’UUID de la recette
+ *     responses:
+ *       200:
+ *         description: Recette trouvée
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Recipe'
+ *       404:
+ *         description: Recette non trouvée
  */
 router.get("/:id", (req, res) => {
     db.get("SELECT * FROM recipes WHERE id = ?", [req.params.id], (err, row) => {
@@ -34,15 +64,33 @@ router.get("/:id", (req, res) => {
 })
 
 /**
- * Permet à un administrateur de publier une nouvelle recette
- * @param {JSON} req : La requête contenant la nouvelle recette
+ * @swagger
+ * /api/recipes:
+ *   post:
+ *     summary: Crée une nouvelle recette (admin)
+ *     tags: [Recettes]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RecipeInput'
+ *     responses:
+ *       201:
+ *         description: Recette créée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Recipe'
  */
 router.post("/", isAdmin, (req, res) => {
     const { title, persons, duration, ingredients, instructions } = req.body
     const id = uuidv4()
 
     db.run(
-        `INSERT INTO recipes (id, title, persons, duration, ingredients, instructions, images) VALUES (?,?,?,?,?,?)`,
+        `INSERT INTO recipes (id, title, persons, duration, ingredients, instructions) VALUES (?,?,?,?,?,?)`,
         [id, title, persons, duration, JSON.stringify(ingredients), instructions],
         function(err) {
             if (err) return res.status(500).json({ error: err.message })
@@ -52,18 +100,44 @@ router.post("/", isAdmin, (req, res) => {
 })
 
 /**
- * Permet à un administrateur de modifier la recette spécifiée par l'id
- * @param {string} id : L'uuid de la recette cible
- * @param {JSON} req : Le tableau JSON qui va modifier la recette
+ * @swagger
+ * /api/recipes/{id}:
+ *   put:
+ *     summary: Met à jour une recette (admin)
+ *     tags: [Recettes]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: UUID de la recette
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RecipeInput'
+ *     responses:
+ *       200:
+ *         description: Recette mise à jour
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Recipe'
+ *       404:
+ *         description: Recette non trouvée
  */
 router.put("/:id", isAdmin, (req, res) => {
     const { title, persons, duration, ingredients, instructions, image } = req.body
 
     db.run(
         `UPDATE recipes
-         SET title = ?, persons = ?, duration = ?, ingredients = ?, instructions = ?, image = ?
+         SET title = ?, persons = ?, duration = ?, ingredients = ?, instructions = ?
          WHERE id = ?`,
-        [title, persons, duration, JSON.stringify(ingredients), instructions, req.params.id, image],
+        [title, persons, duration, JSON.stringify(ingredients), instructions, req.params.id],
         function (err) {
             if (err) return res.status(500).json({ error: err.message })
             if (this.changes === 0) return res.status(404).json({ error: "Recette non trouvée" })
@@ -73,8 +147,25 @@ router.put("/:id", isAdmin, (req, res) => {
 })
 
 /**
- * Permet à un administrateur de supprimer la recette specifiée
- * @param {string} id : L'uuid de la recette cible
+ * @swagger
+ * /api/recipes/{id}:
+ *   delete:
+ *     summary: Supprime une recette (admin)
+ *     tags: [Recettes]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: UUID de la recette à supprimer
+ *     responses:
+ *       200:
+ *         description: Recette supprimée
+ *       404:
+ *         description: Recette non trouvée
  */
 router.delete("/:id", isAdmin, (req, res) => {
     db.run("DELETE FROM recipes WHERE id = ?", [req.params.id], function (err) {
