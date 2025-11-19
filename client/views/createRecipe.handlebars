@@ -5,9 +5,44 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../static/img/logo-repas.jpg">
+    <link rel="stylesheet" href="../static/css/createRecipe.css">
     <title>Création de recette</title>
 </head>
 <body>
+<form id="formRecipe">
+    <div class="formRow">
+        <label for="recipeImage"></label>
+        <input type="file" accept="image/*" id="recipeImage" name="Image" placeholder="Placer l'image de la recette"
+               autocomplete="off" required>
+    </div>
+    <div class="formRow">
+        <label for="recipeTitle"></label>
+        <input type="text" id="recipeTitle" name="Title" placeholder="Titre de la recette" autocomplete="off" required>
+    </div>
+    <div class="formRow">
+        <label for=recipeNbPersons></label>
+        <input type="number" id="recipeNbPersons" name="NbPersons" placeholder="Pour combien de personnes"
+               autocomplete="off" required>
+    </div>
+    <div class="formRow">
+        <label for="recipeDuration"></label>
+        <input type="text" id="recipeDuration" name="Duration" placeholder="Temps de la recette (en min)"
+               autocomplete="off" required>
+    </div>
+    <div class="formRow">
+        <label for="recipeIngredients"></label>
+        <input type="text" id="recipeIngredients" name="Ingredients" placeholder="Ingrédients de la recette"
+               autocomplete="off" required>
+    </div>
+    <div class="formRow">
+        <label for="recipeInstructions"></label>
+        <input type="text" id="recipeInstructions" name="Instructions" placeholder="Instructions de la recette"
+               autocomplete="off" required>
+    </div>
+    <button type="submit">Enregistrer la recette</button>
 
+</form>
+<script src="../static/js/createRecipe.js"></script>
 </body>
 </html>

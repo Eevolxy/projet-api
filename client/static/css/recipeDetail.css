@@ -41,3 +41,17 @@
 #recipe-info ol li {
     margin-bottom: 5px;
 }
+
+button {
+    display: block;
+    margin: 0 auto;
+    border: solid 2px black;
+    border-radius: 20px;
+    background: #ff0000;
+}
+
+button:hover {
+    background: #e60000;
+    transform: scale(110%);
+    transition: all 0.2s ease;
+}
