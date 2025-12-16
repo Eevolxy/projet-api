@@ -36,5 +36,5 @@ app.use(authRoute)
 app.use(viewsRoutes)
 
 app.listen(PORT, () => {
-    console.log("Serveur ouvert sur localhost:3000")
+    console.log("Serveur ouvert sur http://localhost:3000")
 })
