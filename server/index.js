@@ -7,6 +7,7 @@ import viewsRoutes from './routes/views.js'
 import path from "path";
 import {engine} from "express-handlebars";
 import {fileURLToPath} from "url";
+import cors from 'cors'
 
 const app = express();
 const PORT = 3000
@@ -17,6 +18,10 @@ app.use(session({
     secret: "SecretPlaceHolder",
     resave: false,
     saveUninitialized: false
+}))
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
 }))
 
 const __filename = fileURLToPath(import.meta.url)

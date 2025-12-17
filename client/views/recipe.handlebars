@@ -26,11 +26,29 @@
         <ol>
             {{recipe.instructions}}
         </ol>
-        <div id="actionRecipe">
-            <button onclick="deleteRecipe()">Supprimer la recette</button>
-        </div>
+        <button onclick="supprimerRecette('{{ recipe.id }}')">Supprimer la recette</button>
     </div>
 
 </div>
+<script>
+    async function supprimerRecette(recipeId) {
+        if (confirm("Es-tu sûr de vouloir supprimer cette recette ?")) {
+            try {
+                const response = await fetch(`/delete-recipe/${recipeId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert("Recette supprimée !")
+                    window.location.href = "/"
+                } else {
+                    alert("Erreur lors de la suppression.")
+                }
+            } catch (error) {
+                console.error("Erreur:", error)
+            }
+        }
+    }
+</script>
 </body>
 </html>

@@ -86,12 +86,13 @@ router.get("/:id", (req, res) => {
  *               $ref: '#/components/schemas/Recipe'
  */
 router.post("/", isAdmin, (req, res) => {
-    const { title, persons, duration, ingredients, instructions } = req.body
+    const { title, persons, duration, ingredients, instructions, image } = req.body
+
     const id = uuidv4()
 
     db.run(
-        `INSERT INTO recipes (id, title, persons, duration, ingredients, instructions) VALUES (?,?,?,?,?,?)`,
-        [id, title, persons, duration, JSON.stringify(ingredients), instructions],
+        `INSERT INTO recipes (id, title, persons, duration, ingredients, instructions, image) VALUES (?,?,?,?,?,?, ?)`,
+        [id, title, persons, duration, JSON.stringify(ingredients), instructions, image],
         function(err) {
             if (err) return res.status(500).json({ error: err.message })
             res.status(201).json({ id, title, persons, duration, ingredients, instructions })
