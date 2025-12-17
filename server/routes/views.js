@@ -56,4 +56,8 @@ router.get('/recipe/:id', (req, res) => {
     })
 })
 
+router.get('/create-recipe', (req, res) => {
+    res.render('createRecipe')
+})
+
 export default router
