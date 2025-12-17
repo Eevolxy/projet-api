@@ -13,20 +13,21 @@
 
 <body>
 
-    <div id="search-bar">
-        <input id="search-input" type="text" placeholder="Chercher une recette..." autocomplete="off">
-    </div>
-    <h1>Nos Recettes</h1>
-    <div id="items" class="recipes-container">
-        {{#each recipes}}
-            <div class="recipe-card" onclick="window.location.href='/recipe/{{id}}'">
-                <img src="{{image}}">
-                <h3>{{title}}</h3>
-            </div>
-        {{/each}}
-    </div>
-    <img id="return-arrow" src="../static/img/return-arrow.png" alt="return arrow" class="hidden">
-    <div id="recipe-detail" class="hidden"></div>
+<div id="search-bar">
+    <input id="search-input" aria-label="search-input" type="text" placeholder="Chercher une recette..."
+           autocomplete="off">
+</div>
+<h1>Nos Recettes</h1>
+<div id="items" class="recipes-container">
+    {{#each recipes}}
+        <div class="recipe-card" onclick="window.location.href='/recipe/{{id}}'">
+            <img src="{{image}}" alt="Image de la recette">
+            <h3>{{title}}</h3>
+        </div>
+    {{/each}}
+</div>
+<img id="return-arrow" src="../static/img/return-arrow.png" alt="return arrow" class="hidden">
+<div id="recipe-detail" class="hidden"></div>
 
 
 </body>
