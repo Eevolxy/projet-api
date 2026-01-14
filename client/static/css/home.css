@@ -53,7 +53,7 @@ h1 {
     outline: none;
 }
 
-#login-btn {
+#login-btn, #create-btn {
     background-color: transparent;
     border: none;
     color: #666;
@@ -62,7 +62,7 @@ h1 {
     box-shadow: none;
 }
 
-#login-btn:hover {
+#login-btn:hover, #create-btn:hover {
     background-color: transparent;
     color: #333;
     transform: translateX(-5px);
