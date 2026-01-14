@@ -106,6 +106,12 @@ h1 {
     color: #333;
 }
 
-.hidden {
-    display: none;
+.no-recipes {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px;
+    color: #666;
+    font-style: italic;
+    background: #eee;
+    border-radius: 12px;
 }
