@@ -1,6 +1,8 @@
-import express from "express"
+import express, {response} from "express"
 import {db} from "../middlewares/db.js"
+import multer from "multer";
 
+const upload = multer({ dest: 'client/static/img' })
 const router = express.Router()
 
 /**
@@ -20,7 +22,10 @@ const router = express.Router()
  */
 router.get('/', (req, res) => {
     db.all("SELECT * FROM recipes", (err, rows) => {
-        if (err) return res.status(500).send("Erreur serveur")
+        if (err) {
+            console.error(err)
+            return res.status(500).send("Erreur serveur")
+        }
 
         const recipes = rows.map(r => ({
             ...r,
@@ -56,8 +61,68 @@ router.get('/recipe/:id', (req, res) => {
     })
 })
 
+router.delete('/delete-recipe/:id', async (req, res) => {
+    try {
+        const recipeId = req.params.id
+        const sessionCookie = req.headers.cookie
+
+        const apiResponse = await fetch(`http://localhost:3000/api/recipes/${recipeId}`, {
+            method: 'DELETE',
+            headers: {
+                'Cookie': sessionCookie
+            }
+        });
+
+        if (apiResponse.ok) {
+            res.status(200).json({ message: "Supprimé" })
+        } else {
+            res.status(apiResponse.status).json({ message: "Échec suppression API" })
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+})
+
 router.get('/create-recipe', (req, res) => {
     res.render('createRecipe')
 })
+
+router.post('/create-recipe', upload.single("Image"), async (req, res) => {
+    try {
+        const { Title, NbPersons, Duration, Ingredients, Instructions } = req.body
+        const imagePath = req.file ? `../static/img/${req.file.filename}` : null
+
+        const recipeData = {
+            title: Title,
+            persons: parseInt(NbPersons),
+            duration: Duration,
+            ingredients: Ingredients.split(',').map(i => i.trim()),
+            instructions: Instructions,
+            image: imagePath
+        }
+
+        const sessionCookie = req.headers.cookie
+
+        const apiResponse = await fetch('http://localhost:3000/api/recipes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': sessionCookie
+            },
+            body: JSON.stringify(recipeData)
+        });
+
+        if (apiResponse.ok) {
+            res.redirect('/')
+        } else {
+            const errorText = await apiResponse.text()
+            console.error("L'API a refusé l'insertion :", errorText)
+            res.status(500).send(`Erreur API : ${errorText}`)
+        }
+    } catch (err) {
+        console.error("Erreur réseau ou serveur :", err);
+        res.status(500).send("Impossible de contacter l'API")
+    }
+});
 
 export default router
