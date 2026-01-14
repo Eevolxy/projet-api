@@ -22,7 +22,10 @@ const router = express.Router()
  */
 router.get('/', (req, res) => {
     db.all("SELECT * FROM recipes", (err, rows) => {
-        if (err) return res.status(500).send("Erreur serveur")
+        if (err) {
+            console.error(err)
+            return res.status(500).send("Erreur serveur")
+        }
 
         const recipes = rows.map(r => ({
             ...r,
