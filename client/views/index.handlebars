@@ -11,7 +11,16 @@
 </head>
 
 <body>
-
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            Cooking Frenzy
+        </div>
+        <button id="login-btn" onclick="window.location.href='/login'">
+            🛜 Se connecter
+        </button>
+    </nav>
+</header>
 <div id="search-bar">
     <input id="search-input" aria-label="search-input" type="text" placeholder="Chercher une recette..."
            autocomplete="off">
@@ -25,9 +34,6 @@
         </div>
     {{/each}}
 </div>
-<img id="return-arrow" src="../static/img/return-arrow.png" alt="return arrow" class="hidden">
-<div id="recipe-detail" class="hidden"></div>
-
 
 </body>
 <script type="module" src="../static/js/script.js"></script>

@@ -2,28 +2,80 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     margin: 0;
-    padding: 20px;
+    padding: 0 20px;
 }
 
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+}
+
+
 #search-bar {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
     display: flex;
     gap: 8px;
-    padding: 10px 10px;
-    font-size: 16px;
-    border-radius: 20px;
+    padding: 5px 15px;
+    border-radius: 30px;
     background: #222;
 }
 
 #search-bar input {
     flex: 1;
-    padding: 10px 12px;
+    padding: 10px;
     font-size: 16px;
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+}
+
+#login-btn {
+    background-color: transparent;
+    border: none;
+    color: #666;
+    padding: 10px 0;
+    font-weight: 500;
+    box-shadow: none;
+}
+
+#login-btn:hover {
+    background-color: transparent;
+    color: #333;
+    transform: translateX(-5px);
+    box-shadow: none;
 }
 
 .recipes-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 0 20px; /* Marges de sécurité sur les côtés */
 }
 
 .recipe-card {
