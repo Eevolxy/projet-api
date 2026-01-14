@@ -94,7 +94,7 @@ body {
     justify-content: center;
 }
 
-#actionRecipe button {
+#actionRecipe {
     background-color: #e63946;
     color: white;
     padding: 14px 28px;
@@ -107,7 +107,7 @@ body {
     box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
 }
 
-#actionRecipe button:hover {
+#actionRecipe:hover {
     background-color: #c1121f;
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
