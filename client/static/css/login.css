@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     margin: 0;
-    padding: 0;
+    padding: 0 20px;
 }
 
 header {
@@ -73,14 +73,15 @@ h1 {
 #login-form {
     background-color: #fff;
     max-width: 400px;
-    margin: 60px auto; /* Un peu plus d'espace après la barre de navigation */
+    margin: 60px auto;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Ombre plus douce */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     overflow: hidden;
 }
 
 .form-group {
-    margin-bottom: 18px;
+    margin: 18px;
+    padding: 0 10px;
 }
 
 .form-group label {
@@ -91,17 +92,18 @@ h1 {
 }
 
 .form-group input {
-    width: 100%;
+    width: 92%;
     box-sizing: border-box;
-    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 1em;
+    padding: 12px;
 }
 
 .login-btn {
-    width: 100%;
-    padding: 12px;
+    width: 95%;
+    padding: 12px 0;
+    margin: 0 10px;
     border: none;
     border-radius: 6px;
     background-color: #333;
