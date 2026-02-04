@@ -2,6 +2,14 @@ import express from 'express'
 import {db} from "../middlewares/db.js";
 import isAdmin from "../middlewares/isAdmin.js";
 import {v4 as uuidv4} from 'uuid'
+import fs from 'fs'
+import path from 'path'
+
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const router = express.Router()
 
@@ -169,11 +177,43 @@ router.put("/:id", isAdmin, (req, res) => {
  *         description: Recette non trouvée
  */
 router.delete("/:id", isAdmin, (req, res) => {
-    db.run("DELETE FROM recipes WHERE id = ?", [req.params.id], function (err) {
-        if (err) return res.status(500).json({ error: err.message })
-        if (this.changes === 0) return res.status(404).json({ error: "Recette non trouvée" })
-        res.json({ message: "Recette supprimée" })
+    db.get("SELECT image FROM recipes WHERE id = ?", [req.params.id], (err, row) => {
+        if (err) {
+            console.error("Error fetching recipe image:", err.message)
+            return res.status(500).json({ error: err.message })
+        }
+        if (!row) {
+            return res.status(404).json({ error: "Recette non trouvée" })
+        }
+
+        const imagePathInDB = row.image
+        if (imagePathInDB) {
+            const filename = path.basename(imagePathInDB)
+            const absoluteImagePath = path.join(__dirname, '..', '..', 'client', 'static', 'img', filename)
+
+            fs.unlink(absoluteImagePath, (unlinkErr) => {
+                if (unlinkErr) {
+                    console.error(`Failed to delete image file ${absoluteImagePath}:`, unlinkErr.message)
+                }
+                deleteRecipeFromDB(req, res)
+            })
+        } else {
+            deleteRecipeFromDB(req, res)
+        }
     })
+
+    function deleteRecipeFromDB(req, res) {
+        db.run("DELETE FROM recipes WHERE id = ?", [req.params.id], function (err) {
+            if (err) {
+                console.error("Error deleting recipe from DB:", err.message)
+                return res.status(500).json({ error: err.message })
+            }
+            if (this.changes === 0) {
+                return res.status(404).json({ error: "Recette non trouvée" })
+            }
+            res.json({ message: "Recette supprimée" })
+        })
+    }
 })
 
 export default router

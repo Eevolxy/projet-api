@@ -16,12 +16,20 @@
         <div class="logo">
             Cooking Frenzy
         </div>
+        {{#if isAdmin}}
         <button id="create-btn" onclick="window.location.href='/create-recipe'">
             🥘 Créer une recette
         </button>
-        <button id="login-btn" onclick="window.location.href='/login'">
+        {{/if}}
+        {{#if user}}
+        <button id="login-btn" onclick="window.location.href='/logout'">
+            🛜 Déconnexion
+        </button>
+        {{else}}
+        <button onclick="window.location.href='/login'">
             🛜 Se connecter
         </button>
+        {{/if}}
     </nav>
 </header>
 <div id="search-bar">
