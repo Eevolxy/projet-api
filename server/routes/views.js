@@ -1,8 +1,19 @@
 import express, {response} from "express"
 import {db} from "../middlewares/db.js"
-import multer from "multer";
+import multer from "multer"
+import path from "path"
 
-const upload = multer({ dest: 'client/static/img' })
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'client/static/img')
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+    }
+})
+
+const upload = multer({ storage: storage })
 const router = express.Router()
 
 /**
@@ -32,7 +43,10 @@ router.get('/', (req, res) => {
             ingredients: JSON.parse(r.ingredients)
         }))
 
-        res.render('index', { recipes })
+        const user = req.session.user || null
+        const isAdmin = user && user.role === 'admin'
+
+        res.render('index', { recipes, user, isAdmin })
     })
 })
 

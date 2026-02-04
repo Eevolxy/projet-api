@@ -23,17 +23,22 @@ function isEmail(str) {
  * @return {Promise<{error: boolean, message: string}>}
  */
 function checkUser(username, email) {
-    return new Promise((resolve, reject) =>{
-        db.get("SELECT * FROM users WHERE username = ?", [username], (err, user) => {
-            if (err) return reject({ error: true, message: "Erreur serveur" })
-            if (user) return resolve({ error: true, message: "Ce nom d'utilisateur est déjà pris" })
-        })
-        db.get("SELECT * FROM users WHERE email = ?", [email], (err, user) => {
-            if (err) return reject({ error: true, message: "Erreur serveur" })
-            if (user) return resolve({ error: true, message: "Cette email est déjà prise" })
-        })
-        return { error: false, message: "" }
-    })
+    return new Promise((resolve, reject) => {
+        db.get("SELECT username, email FROM users WHERE username = ? OR email = ?", [username, email], (err, user) => {
+            if (err) return reject(err);
+
+            if (user) {
+                if (user.username === username) {
+                    return resolve({ error: true, message: "Ce nom d'utilisateur est déjà pris" });
+                }
+                if (user.email === email) {
+                    return resolve({ error: true, message: "Cette email est déjà prise" });
+                }
+            }
+
+            resolve({ error: false });
+        });
+    });
 }
 
 /**
@@ -118,8 +123,16 @@ router.post('/login', async (req, res) => {
             username: user.username,
             role: user.isAdmin === 1 ? 'admin' : 'user'
         }
-        res.redirect('/')
+        return res.redirect('/')
     })
+})
+
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) return res.status(500).send("Erreur déconnexion")
+        res.clearCookie('connect.sid')
+        res.redirect('/')
+    });
 })
 
 /**
