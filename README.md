@@ -1,31 +1,88 @@
-🍳 Cooking Frenzy - Gestionnaire de Recettes
-Cooking Frenzy est une application web développée en Node.js permettant aux passionnés de cuisine de rechercher, consulter et gérer leurs recettes. Ce projet a été conçu pour démontrer l'intégration d'une API de recettes et la gestion d'un système d'authentification complet.
+# projet-api
 
-🚀 Fonctionnalités
-🔍 Consultation & Recherche
-Affichage dynamique : Liste des recettes récupérées via l'API.
+This project is a full-stack web application, likely an API, built using Node.js and Express. It features user authentication, session management, file uploads, and uses SQLite as a database. The API is documented using Swagger/OpenAPI, and the codebase itself is documented with JSDoc.
 
-Recherche en temps réel : Filtrage instantané des recettes par titre grâce à un moteur de recherche en JavaScript (côté client).
+## Features
 
-Détails complets : Visualisation des ingrédients, des instructions et du nombre de personnes pour chaque plat.
+-   **API Development**: Built with Express.js for robust API endpoints.
+-   **Database**: Uses SQLite3 for data persistence.
+-   **User Authentication**: Implements secure user authentication with `bcrypt` for password hashing and `express-session` for session management.
+-   **CORS Enabled**: Configured with `cors` for handling cross-origin requests.
+-   **File Uploads**: Supports file uploads using `multer`.
+-   **Templating**: Utilizes `express-handlebars` and `handlebars` for server-side rendering, if applicable.
+-   **API Documentation**: Automatically generated API documentation using `swagger-jsdoc` and `swagger-ui-express`.
+-   **Code Documentation**: In-code documentation generated with `jsdoc`.
+-   **Unique ID Generation**: Uses `uuid` for generating unique identifiers.
 
-👤 Authentification
-Espace Membre : Formulaire de connexion sécurisé pour accéder aux fonctions d'administration.
+## Technologies Used
 
-Navigation Intelligente : Header dynamique permettant de basculer entre l'accueil et la connexion.
+-   **Backend**: Node.js, Express.js
+-   **Database**: SQLite3
+-   **Authentication**: bcrypt, express-session
+-   **Templating**: Express-Handlebars, Handlebars
+-   **File Uploads**: Multer
+-   **API Documentation**: Swagger-JSDoc, Swagger-UI-Express
+-   **Code Documentation**: JSDoc
+-   **Utilities**: CORS, UUID
 
-🛠️ Gestion des Recettes (CRUD)
-Ajout : Interface dédiée pour créer de nouvelles recettes.
+## Installation
 
-Suppression : Possibilité de retirer des recettes de la base de données.
+To set up the project locally, follow these steps:
 
-Interface Intuitive : Boutons d'action rapides et flèche de retour fluide pour une navigation aisée.
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/Eevolxy/projet-api.git
+    cd projet-api
+    ```
 
-🛠️ Stack Technique
-Backend : Node.js avec le framework Express.
+2.  **Install dependencies**:
+    Navigate to the project root directory and install all necessary Node.js packages:
+    ```bash
+    npm install
+    ```
 
-Moteur de Template : Handlebars (HBS) pour le rendu dynamique des pages HTML.
+## Usage
 
-Frontend : CSS3 moderne (Flexbox, Grid) et JavaScript Vanilla (ES6+).
+To run the server, execute the following command from the project root directory:
 
-API : Intégration d'une API externe pour la récupération des données culinaires.
+```bash
+node server/index.js
+```
+
+Or, if your `package.json` has a start script defined (it doesn't currently, but you could add one):
+
+```bash
+npm start
+```
+
+## API Documentation
+
+Once the server is running, you can access the interactive API documentation (Swagger UI) at:
+
+`http://localhost:<PORT>/api-docs` (replace `<PORT>` with the actual port your server is running on, e.g., 3000)
+
+You can also view the generated JSDoc documentation by opening the `docs/index.html` file in your browser.
+
+## Project Structure
+
+-   `.git/`: Git version control directory.
+-   `.idea/`: IDE (e.g., WebStorm/IntelliJ) configuration files.
+-   `client/`: Contains client-side application files (if any).
+-   `docs/`: Generated JSDoc documentation.
+-   `node_modules/`: Node.js dependencies.
+-   `server/`: Contains the server-side application logic.
+    -   `index.js`: Main entry point for the server.
+    -   Other server-related files (e.g., routes, controllers, models, middleware).
+-   `.gitignore`: Specifies intentionally untracked files to ignore.
+-   `jsdoc.json`: Configuration file for JSDoc.
+-   `package.json`: Project metadata and dependencies.
+-   `package-lock.json`: Records the exact dependency tree.
+
+## License
+
+This project is licensed under the ISC License. See the `LICENSE` file (if present) for details or refer to the `package.json`.
+
+## Authors
+
+Eevolxy
+Fox-Programs
